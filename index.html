@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental - Pitch Deck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2D5A27;
+            --primary-dark: #1e3d1a;
+            --primary-light: #3d7a35;
+            --accent: #E8A838;
+            --background: #FFFFFF;
+            --text-primary: #1A1A2E;
+            --text-secondary: #6B7280;
+            --success: #10B981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            overflow: hidden;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            padding: 60px 80px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            opacity: 1;
+        }
+
+        /* Slide Backgrounds */
+        .slide-title {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .slide-content {
+            background: var(--background);
+        }
+
+        .slide-dark {
+            background: linear-gradient(135deg, var(--text-primary) 0%, #2d2d4a 100%);
+            color: white;
+        }
+
+        .slide-accent {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            color: white;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 24px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .slide-dark p, .slide-accent p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .subtitle {
+            font-size: 28px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+        }
+
+        /* Logo */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+        }
+
+        .logo-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            color: white;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            flex: 1;
+            align-items: center;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            flex: 1;
+            align-items: start;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            flex: 1;
+            align-items: start;
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-white {
+            background: white;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--accent);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .card-white .card-icon {
+            background: var(--primary);
+            color: white;
+        }
+
+        .card h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .card p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .card-white p {
+            color: var(--text-secondary);
+        }
+
+        /* Stats */
+        .stat-box {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .stat-number {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 72px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Problem/Solution */
+        .problem-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .problem-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 24px;
+        }
+
+        .problem-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(239, 68, 68, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #EF4444;
+            flex-shrink: 0;
+        }
+
+        .solution-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(16, 185, 129, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--success);
+            flex-shrink: 0;
+        }
+
+        /* Features List */
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 22px;
+        }
+
+        .feature-check {
+            width: 32px;
+            height: 32px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            gap: 40px;
+            flex: 1;
+            align-items: stretch;
+        }
+
+        .step {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            margin: 0 auto 24px;
+        }
+
+        .step h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .step p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Target Market */
+        .market-segment {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        .market-segment h3 {
+            color: var(--primary);
+        }
+
+        .market-segment p {
+            color: var(--text-secondary);
+            font-size: 18px;
+        }
+
+        .market-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary);
+        }
+
+        /* Competitive */
+        .comparison-table {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            padding: 20px 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-row.header {
+            background: rgba(255, 255, 255, 0.1);
+            font-weight: 700;
+        }
+
+        .comparison-row span {
+            font-size: 18px;
+        }
+
+        .comparison-row span:first-child {
+            font-weight: 600;
+        }
+
+        .check {
+            color: var(--success);
+        }
+
+        .cross {
+            color: #EF4444;
+        }
+
+        /* Roadmap */
+        .roadmap-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .roadmap-item h4 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .roadmap-item span {
+            font-size: 14px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .roadmap-item p {
+            font-size: 16px;
+            margin-top: 12px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* CTA */
+        .cta-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h1 {
+            font-size: 72px;
+            margin-bottom: 32px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            font-weight: 600;
+            border-radius: 12px;
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: var(--text-primary);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
+        .slide-content .nav-dot {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .slide-content .nav-dot.active {
+            background: var(--primary);
+        }
+
+        .nav-arrows {
+            position: fixed;
+            bottom: 30px;
+            right: 40px;
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+        }
+
+        .nav-arrow {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .nav-arrow:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .slide-content .nav-arrow {
+            background: rgba(0, 0, 0, 0.1);
+            color: var(--text-primary);
+        }
+
+        .slide-content .nav-arrow:hover {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 40px;
+            left: 40px;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            z-index: 100;
+        }
+
+        .slide-content .slide-counter {
+            color: var(--text-secondary);
+        }
+
+        /* Team */
+        .team-member {
+            text-align: center;
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 40px;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .team-member h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .team-member p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide.active .animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .slide.active .delay-1 { animation-delay: 0.1s; }
+        .slide.active .delay-2 { animation-delay: 0.2s; }
+        .slide.active .delay-3 { animation-delay: 0.3s; }
+        .slide.active .delay-4 { animation-delay: 0.4s; }
+        .slide.active .delay-5 { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 1: Title -->
+        <div class="slide slide-title active" data-slide="1">
+            <div class="logo animate">
+                <svg class="logo-icon" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="80" height="80" rx="16" fill="white" fill-opacity="0.2"/>
+                    <path d="M40 16L16 32V56L40 72L64 56V32L40 16Z" stroke="white" stroke-width="5" fill="none"/>
+                    <path d="M40 16V72M16 32L64 56M64 32L16 56" stroke="white" stroke-width="3" opacity="0.5"/>
+                    <circle cx="40" cy="40" r="10" fill="#E8A838"/>
+                </svg>
+                <span class="logo-text">Rental</span>
+            </div>
+            <h1 class="animate delay-1">Direct Tenant-Landlord<br>Connection Platform</h1>
+            <p class="subtitle animate delay-2">Eliminating Agent Fees Through Technology</p>
+            <p class="animate delay-3" style="font-size: 18px; color: rgba(255,255,255,0.6);">Hackathon 2026 Presentation</p>
+        </div>
+
+        <!-- Slide 2: The Problem -->
+        <div class="slide slide-dark" data-slide="2">
+            <h2 class="animate">The Problem</h2>
+            <div class="problem-list animate delay-1">
+                <div class="problem-item">
+                    <div class="problem-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    </div>
+                    <span>Agent fees consume 1-3 months rent, burdening tenants</span>
+                </div>
+                <div class="problem-item">
+                    <div class="problem-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    </div>
+                    <span>Fake listings waste time and cause financial losses</span>
+                </div>
+                <div class="problem-item">
+                    <div class="problem-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <span>Finding housing is time-consuming with multiple viewings</span>
+                </div>
+                <div class="problem-item">
+                    <div class="problem-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    </div>
+                    <span>Lack of transparency creates distrust between parties</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Our Solution -->
+        <div class="slide slide-accent" data-slide="3">
+            <h2 class="animate">Our Solution</h2>
+            <p class="animate delay-1" style="font-size: 28px; margin-bottom: 60px;">A platform that connects tenants directly with verified landlords, eliminating middlemen and agent exploitation.</p>
+            <div class="grid-3 animate delay-2">
+                <div class="card">
+                    <div class="card-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    </div>
+                    <h3>Zero Agent Fees</h3>
+                    <p>Direct communication means zero commission charges</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                    <h3>Verified Listings</h3>
+                    <p>Every landlord and property is verified for authenticity</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    </div>
+                    <h3>Direct Contact</h3>
+                    <p>Chat and call landlords directly, no middlemen</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Key Stats -->
+        <div class="slide slide-dark" data-slide="4">
+            <h2 class="animate" style="text-align: center;">The Opportunity</h2>
+            <div class="grid-4 animate delay-1">
+                <div class="stat-box">
+                    <div class="stat-number">N50B+</div>
+                    <div class="stat-label">Annual Agent Fees in Nigeria</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">15M+</div>
+                    <div class="stat-label">Potential Tenants Nationwide</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">2M+</div>
+                    <div class="stat-label">Rental Properties in Nigeria</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">70%</div>
+                    <div class="stat-label">Prefer Direct Landlord Contact</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Key Features -->
+        <div class="slide slide-content" data-slide="5">
+            <h2 class="animate" style="color: var(--primary);">Platform Features</h2>
+            <div class="grid-2 animate delay-1">
+                <div>
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <div class="feature-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                            <span>Landlord ID verification system</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                            <span>Multi-image property galleries</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                            <span>Direct messaging & call system</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                            <span>Advanced search & filters</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                            <span>Fake listing reporting system</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <div class="feature-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                            <span>Save & favorites functionality</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                            <span>Responsive mobile-first design</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                            <span>Secure user authentication</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                            <span>Newsletter & updates</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                            <span>Property listing management</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: How It Works -->
+        <div class="slide slide-dark" data-slide="6">
+            <h2 class="animate">How It Works</h2>
+            <div class="steps animate delay-1">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Sign Up</h3>
+                    <p>Create a free account as a tenant or landlord in seconds</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Browse & Search</h3>
+                    <p>Explore verified listings with filters for location, price, type</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Connect</h3>
+                    <p>Message or call landlords directly through our platform</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Move In</h3>
+                    <p>Schedule viewings, negotiate, and move into your new home</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Target Market -->
+        <div class="slide slide-content" data-slide="7">
+            <h2 class="animate" style="color: var(--primary);">Target Market</h2>
+            <div class="grid-3 animate delay-1">
+                <div class="market-segment">
+                    <div class="market-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    </div>
+                    <h3>Young Professionals</h3>
+                    <p>Age 22-35, urban areas, tech-savvy, seeking convenient housing</p>
+                </div>
+                <div class="market-segment">
+                    <div class="market-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    </div>
+                    <h3>Families</h3>
+                    <p>Looking for long-term rentals, value transparency and reliability</p>
+                </div>
+                <div class="market-segment">
+                    <div class="market-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    </div>
+                    <h3>Property Owners</h3>
+                    <p>Landlords tired of agent commissions, want direct tenant relationships</p>
+                </div>
+            </div>
+            <div class="grid-2 animate delay-2" style="margin-top: 40px;">
+                <div class="card card-white">
+                    <h3 style="color: var(--primary);">Geographic Focus</h3>
+                    <p>Lagos, Abuja, Port Harcourt, Kano, Ibadan - Nigeria's major economic hubs with highest rental demand</p>
+                </div>
+                <div class="card card-white">
+                    <h3 style="color: var(--primary);">Revenue Model</h3>
+                    <p>Freemium for tenants, premium listings for landlords, future: verified document services, payment processing</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Competitive Advantage -->
+        <div class="slide slide-dark" data-slide="8">
+            <h2 class="animate">Competitive Advantage</h2>
+            <div class="comparison-table animate delay-1">
+                <div class="comparison-row header">
+                    <span>Feature</span>
+                    <span>Rental</span>
+                    <span>Traditional Agents</span>
+                    <span>Other Platforms</span>
+                </div>
+                <div class="comparison-row">
+                    <span>Zero Agent Fees</span>
+                    <span class="check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    <span class="cross"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>
+                    <span class="cross"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>
+                </div>
+                <div class="comparison-row">
+                    <span>Verified Landlords</span>
+                    <span class="check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    <span class="cross"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>
+                    <span class="cross"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>
+                </div>
+                <div class="comparison-row">
+                    <span>Direct Communication</span>
+                    <span class="check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    <span class="cross"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>
+                    <span class="check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                </div>
+                <div class="comparison-row">
+                    <span>Report Fake Listings</span>
+                    <span class="check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    <span class="cross"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>
+                    <span class="cross"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>
+                </div>
+                <div class="comparison-row">
+                    <span>Mobile Responsive</span>
+                    <span class="check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    <span class="cross"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>
+                    <span class="check"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Roadmap -->
+        <div class="slide slide-content" data-slide="9">
+            <h2 class="animate" style="color: var(--primary);">Product Roadmap</h2>
+            <div class="grid-4 animate delay-1">
+                <div class="roadmap-item">
+                    <span>PHASE 1</span>
+                    <h4>Core Platform</h4>
+                    <p>User auth, listings, search, contact system, verification</p>
+                </div>
+                <div class="roadmap-item">
+                    <span>PHASE 2</span>
+                    <h4>Enhanced Features</h4>
+                    <p>Mobile app, map view, reviews/ratings, AI recommendations</p>
+                </div>
+                <div class="roadmap-item">
+                    <span>PHASE 3</span>
+                    <h4>Payment Integration</h4>
+                    <p>Secure rent payments, escrow services, recurring payments</p>
+                </div>
+                <div class="roadmap-item">
+                    <span>PHASE 4</span>
+                    <h4>Scale & Expand</h4>
+                    <p>Pan-African expansion, API for agencies, B2B services</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Team -->
+        <div class="slide slide-dark" data-slide="10">
+            <h2 class="animate">Our Team</h2>
+            <div class="grid-3 animate delay-1" style="max-width: 900px; margin: 0 auto;">
+                <div class="team-member">
+                    <div class="team-avatar">TM</div>
+                    <h3>Team Member</h3>
+                    <p>Lead Developer & Designer</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar">TM</div>
+                    <h3>Team Member</h3>
+                    <p>Product & Research</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar">TM</div>
+                    <h3>Team Member</h3>
+                    <p>Business & Marketing</p>
+                </div>
+            </div>
+            <p class="animate delay-2" style="text-align: center; margin-top: 60px; font-size: 24px;">Passionate about solving Nigeria's housing challenges through technology</p>
+        </div>
+
+        <!-- Slide 11: Call to Action -->
+        <div class="slide slide-accent" data-slide="11">
+            <div class="cta-content">
+                <div class="logo animate" style="justify-content: center;">
+                    <svg class="logo-icon" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="80" height="80" rx="16" fill="white" fill-opacity="0.2"/>
+                        <path d="M40 16L16 32V56L40 72L64 56V32L40 16Z" stroke="white" stroke-width="5" fill="none"/>
+                        <path d="M40 16V72M16 32L64 56M64 32L16 56" stroke="white" stroke-width="3" opacity="0.5"/>
+                        <circle cx="40" cy="40" r="10" fill="#E8A838"/>
+                    </svg>
+                </div>
+                <h1 class="animate delay-1">Let's Revolutionize<br>Rental in Nigeria</h1>
+                <p class="animate delay-2" style="font-size: 28px;">Direct. Transparent. Trusted.</p>
+                <div class="cta-buttons animate delay-3">
+                    <a href="#" class="btn btn-primary">View Live Demo</a>
+                    <a href="#" class="btn btn-accent">Get In Touch</a>
+                </div>
+                <div class="animate delay-4" style="margin-top: 60px;">
+                    <p style="font-size: 18px; color: rgba(255,255,255,0.8);">Contact: support@rental.ng | 08037126119</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav" id="navDots"></div>
+    <div class="nav-arrows">
+        <button class="nav-arrow" id="prevBtn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button class="nav-arrow" id="nextBtn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+    </div>
+    <div class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">11</span></div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const navDots = document.getElementById('navDots');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentSlideEl = document.getElementById('currentSlide');
+        const totalSlidesEl = document.getElementById('totalSlides');
+        
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        totalSlidesEl.textContent = totalSlides;
+
+        // Create navigation dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+            dot.addEventListener('click', () => goToSlide(i));
+            navDots.appendChild(dot);
+        }
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                }
+            });
+
+            document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+
+            currentSlideEl.textContent = currentSlide + 1;
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
+            if (currentSlide >= totalSlides) currentSlide = 0;
+            updateSlide();
+        }
+
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            goToSlide(currentSlide - 1);
+        }
+
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        }
+
+        // Click anywhere to advance (except on interactive elements)
+        document.querySelector('.presentation').addEventListener('click', (e) => {
+            if (!e.target.closest('button') && !e.target.closest('a') && !e.target.closest('.nav-dot')) {
+                nextSlide();
+            }
+        });
+    </script>
+</body>
+</html>
